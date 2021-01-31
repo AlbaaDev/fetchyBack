@@ -1,36 +1,24 @@
 /**
  * 
  */
-package com.web.fetchyback.models;
-
-
-import org.springframework.data.annotation.Id;
-import org.springframework.data.mongodb.core.mapping.Document;
+package com.web.fetchyback.jwt;
 
 /**
  * @author abi
  *
  */
-@Document(collection = "users")
-public class User {
-	
-	@Id
-	private long id;
-	private String userName;
-	private String password;
-	
-	/**
-	 * @return the id
-	 */
-	public long getId() {
-		return id;
-	}
+public class JwtRequest {
 
+    private String userName;
+    private String password;
+    
 	/**
-	 * @param id the id to set
+	 * @param userName
+	 * @param password
 	 */
-	public void setId(long id) {
-		this.id = id;
+	public JwtRequest(String userName, String password) {
+		this.userName = userName;
+		this.password = password;
 	}
 	
 	/**
@@ -39,21 +27,18 @@ public class User {
 	public String getUserName() {
 		return userName;
 	}
-
 	/**
 	 * @param userName the userName to set
 	 */
 	public void setUserName(String userName) {
 		this.userName = userName;
 	}
-
 	/**
 	 * @return the password
 	 */
 	public String getPassword() {
 		return password;
 	}
-
 	/**
 	 * @param password the password to set
 	 */
