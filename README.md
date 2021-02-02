@@ -1,3 +1,3 @@
 # fetchyBack
-Back-end for fetchy app to find new emerging markets and products
+fetchy is an app to find new emerging markets and products
 Backend : Spring 
