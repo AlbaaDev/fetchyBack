@@ -1,5 +1,7 @@
 # fetchyBack
-fetchy is an app to find new emerging markets and products
+fetchy is an app to find new emerging markets and products from marketplaces.
 
+DB : MongoDB
+Backend : Spring
 
-Backend : Spring 
+Note: Make sure you change the application properties
