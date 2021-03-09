@@ -24,12 +24,12 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 	}
 
 	@Override
-	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-		com.web.fetchyback.models.User userFromDB = userRepository.findByUserName(username);
+	public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
+		com.web.fetchyback.models.User userFromDB = userRepository.findByEmail(email);
 		
 		if(userFromDB == null) {
-			throw new UsernameNotFoundException(username);
+			throw new UsernameNotFoundException(email);
 		}
-		return new LoggedUser(userFromDB.getId(), userFromDB.getUserName(), userFromDB.getPassword());
+		return new LoggedUser(userFromDB.getId(), userFromDB.getEmail(), userFromDB.getPassword());
 	}
 }

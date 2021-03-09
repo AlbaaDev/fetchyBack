@@ -15,36 +15,44 @@ import org.springframework.data.mongodb.core.mapping.Document;
 public class User {
 	
 	@Id
-	private long id;
-	private String userName;
+	private String id;
+	private String email;
 	private String password;
-	
+
+	public User() {
+	}
+
+	public User(String email, String password) {
+		this.email = email;
+		this.password = password;
+	}
+
 	/**
 	 * @return the id
 	 */
-	public long getId() {
+	public String getId() {
 		return id;
 	}
 
 	/**
 	 * @param id the id to set
 	 */
-	public void setId(long id) {
+	public void setId(String id) {
 		this.id = id;
 	}
 	
 	/**
-	 * @return the userName
+	 * @return the email
 	 */
-	public String getUserName() {
-		return userName;
+	public String getEmail() {
+		return email;
 	}
 
 	/**
-	 * @param userName the userName to set
+	 * @param email the email to set
 	 */
-	public void setUserName(String userName) {
-		this.userName = userName;
+	public void setEmail(String email) {
+		this.email = email;
 	}
 
 	/**

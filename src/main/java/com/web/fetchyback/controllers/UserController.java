@@ -30,35 +30,29 @@ import com.web.fetchyback.service.UserService;
 @RequestMapping("/users")
 public class UserController {
 	
-	@Autowired
-	private UserRepository userRepository;
+    @Autowired
+    private UserService userService;
+    
+    @Autowired
+    private JwtUtility jwtUtility;
 	
 	@Autowired
 	private BCryptPasswordEncoder bCryptPasswordEncoder;
-	
-    @Autowired
-    private JwtUtility jwtUtility;
-
-    @Autowired
-    private UserService userService;
 	
 	@Autowired
 	private AuthenticationManager authenticationManager;
 	
 	@GetMapping("/all")
-	public List<User> index() {
-		return userRepository.findAll();
+	public List<User> getAll() {
+		return userService.getAll();
 	}
-	
-	@GetMapping("/hello")
-	public String hello() {
-		return "Hello !!";
-	}
-	
-	@PostMapping("/signup")
-	public void signUp(@RequestBody User user) {
-		user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
-		userRepository.save(user);
+
+	@PostMapping("/register")
+	public void register(@RequestBody User userForm) {
+		User userToSave = new User();
+		userToSave.setEmail(userForm.getEmail());
+		userToSave.setPassword(bCryptPasswordEncoder.encode(userForm.getPassword()));
+		userService.save(userToSave);
 	}
 	
 	@PostMapping("/authenticate")
@@ -66,7 +60,7 @@ public class UserController {
 	     try {
 	            authenticationManager.authenticate(
 	                    new UsernamePasswordAuthenticationToken(
-	                            jwtRequest.getUserName(),
+	                            jwtRequest.getEmail(),
 	                            jwtRequest.getPassword()
 	                    )
 	            );
@@ -75,11 +69,10 @@ public class UserController {
 	        }
 
 	        final UserDetails userDetails
-	                = userService.loadUserByUsername(jwtRequest.getUserName());
+	                = userService.loadUserByUsername(jwtRequest.getEmail());
 
 	        final String jwtToken =
 	                jwtUtility.generateToken(userDetails);
-
 	        return ResponseEntity.ok(new JwtResponse(jwtToken));
 	}
 }

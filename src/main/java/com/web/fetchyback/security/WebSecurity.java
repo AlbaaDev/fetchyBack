@@ -7,7 +7,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
@@ -21,8 +20,7 @@ import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 
 import com.web.fetchyback.jwt.JwtFilter;
 
-import static com.web.fetchyback.security.SecurityConstants.SIGN_UP_URL;
-import static com.web.fetchyback.security.SecurityConstants.LOG_IN_URL;;;
+import static com.web.fetchyback.security.SecurityConstants.*;
 
 
 /**
@@ -54,7 +52,8 @@ public class WebSecurity extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.cors().and().csrf().disable().authorizeRequests()
-                .antMatchers(HttpMethod.POST, SIGN_UP_URL, LOG_IN_URL).permitAll()
+				.antMatchers(HttpMethod.POST, SIGN_UP_URL, LOG_IN_URL).permitAll()
+				.antMatchers(HttpMethod.GET, HELLO_URL, ALL_USERS).permitAll()
                 .anyRequest().authenticated()
                 .and()
                 .sessionManagement()

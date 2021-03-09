@@ -14,11 +14,11 @@ import org.springframework.security.core.userdetails.UserDetails;
  */
 public class LoggedUser implements UserDetails {
 	
-	private final long id;
+	private final String id;
 	private final String userName;
     private final String password;
     
-    public LoggedUser(long id, String userName, String password) {
+    public LoggedUser(String id, String userName, String password) {
     	this.id = id;
     	this.userName = userName;
 		this.password = password;
@@ -32,7 +32,7 @@ public class LoggedUser implements UserDetails {
     /**
 	 * @return the id
 	 */
-	public long getId() {
+	public String getId() {
 		return id;
 	}
 

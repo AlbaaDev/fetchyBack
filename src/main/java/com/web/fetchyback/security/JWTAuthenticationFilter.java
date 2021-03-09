@@ -50,16 +50,16 @@ public class JWTAuthenticationFilter extends UsernamePasswordAuthenticationFilte
     	     User creds = null;
 	        if (req.getParameter("userName") != null  && req.getParameter("password") != null) {
 	            creds = new User();              
-	            creds.setUserName(req.getParameter("userName"));
+	            creds.setEmail(req.getParameter("userName"));
 	            creds.setPassword(req.getParameter("password"));                
 	        } else {
 	            creds = new ObjectMapper()
 	                    .readValue(req.getInputStream(), User.class);
 	        }
-	        System.out.println("creds : " + creds.getUserName() + " " + creds.getPassword());
+	        System.out.println("creds : " + creds.getEmail() + " " + creds.getPassword());
 	        return authenticationManager.authenticate(
 	                new UsernamePasswordAuthenticationToken(
-	                        creds.getUserName(),
+	                        creds.getEmail(),
 	                        creds.getPassword(),
 	                        new ArrayList<>())
 	        );
